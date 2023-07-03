@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<title>{{title}}</title>
+
+<!-- <link rel="stylesheet" href=".css"> -->
+
+<style>{{ css | default('') | safe }}</style>
+<style>{{ 'jc/global.css' | cat | safe }}</style>
+<style>{{ 'jc/skeleton.css' | cat | safe }}</style>
+<style>{{ 'jc/normalize.css' | cat | safe}}</style>
+</head>
+<body>
+  <header>
+
+  </header>
+
+  <main id="main">
+    {{ main |safe}}
+  </main>
+
+  <footer>
+
+  </footer>
+  <script>
+      {{ 'jc/global.js' |cat|safe }}
+  </script>
+</body>
+</html>
