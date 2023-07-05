@@ -1,4 +1,4 @@
-from flask import Flask, render_template,jsonify
+from flask import Flask, redirect, render_template, jsonify, abort
 from datetime import datetime
 from markdown import markdown
 
@@ -44,9 +44,6 @@ def test():
         )
     return 'Error'
 
-@app.route('/article/<path:title>', methods=['GET'])
-def article_single():
-    return 'single'
 
 # 浏览项目文件
 @app.route('/browse/', defaults={'path': '.'})
@@ -55,7 +52,10 @@ def browse_files(path):
     root='/browse'
     path = path or '.'
     if not os.path.exists(path):
-        return f'Path does not exist. "{path}"'
+        #return app.test_client().get('/404')
+        #abort(404)
+        #return f'Path does not exist: {path}', 404
+        return fl.render('error.html', code=404)
 
     # 访问文件
     data = get_file_info(path)
@@ -84,6 +84,10 @@ def ping():
     return datetime.now().isoformat()
 
 
+@app.route('/a', methods=['GET'])
+def test_redirect():
+    #return redirect('/ping')
+    return app.test_client().get('/ping')
 
 
 # 在模板中读取文件
@@ -94,6 +98,9 @@ def cat(file_path):
         content = file.read()
     return content
 
+
+
+# 一些辅助函数     ####################
 
 def get_file_info(path):
     path = Path(path)
