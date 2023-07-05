@@ -1,0 +1,18 @@
+<ul class="navbar">
+  {% for item in menu %}
+  {% if item.dropdown %}
+  <li class="menu-item dropdown">
+    <a href="javascript:0" class="dropdown-btn"><i>{{ item.title }}</i></a>
+    <div class="dropdown-container">
+      {% for subitem in item.submenu %}
+      <a href="{{ subitem.action }}">{{ subitem.title }}</a>
+      {% endfor %}
+    </div>
+  </li>
+  {% else %}
+  <li class="menu-item">
+    <a href="{{ item.action }}"><i>{{ item.title }}</i></a>
+  </li>
+  {% endif %}
+  {% endfor %}
+</ul>

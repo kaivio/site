@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="zh-hans">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-<title>{{title}}</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <title>{{title}}</title>
 
-<!-- <link rel="stylesheet" href=".css"> -->
+    <!-- <link rel="stylesheet" href=".css"> -->
+    <script>page_attr = {{page_attr|default('{}')}}</script>
 
-<style>{{ css | default('') | safe }}</style>
-<style>{{ 'jc/global.css' | cat | safe }}</style>
-<style>{{ 'jc/skeleton.css' | cat | safe }}</style>
-<style>{{ 'jc/normalize.css' | cat | safe}}</style>
-</head>
-<body>
-  <header>
-
-  </header>
-
-  <main id="main">
-    {{ main |safe}}
-  </main>
-
-  <footer>
-
-  </footer>
-  <script>
+    <style>{{ 'jc/normalize.css' | cat | safe}}</style>
+    <style>{{ 'jc/skeleton.css' | cat | safe }}</style>
+    <style>{{ 'jc/global.css' | cat | safe }}</style>
+    <style>
+      {% block style %}
+      {% endblock %}
+    </style>
+    <style>{{ css | safe }}</style>
+  </head>
+  <body>
+    {% block body %}
+      ...
+    {% endblock %}
+    <script>
       {{ 'jc/global.js' |cat|safe }}
-  </script>
-</body>
+    </script>
+    {% block body_end %}
+      <script>console.log(new Datw() + ' End html')</script>
+    {% endblock %}
+  </body>
 </html>

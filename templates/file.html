@@ -1,0 +1,43 @@
+{% extends "page.html" %}
+{% block main %}
+<h1>Browsing Directory: {{ current_directory }}</h1>
+
+{% if file['type'] == 'dir' %}
+<ul>
+    {% for i in file['content'] %}
+    <li>
+      <a href="{{root}}/{{ i['parent']}}/{{ i['name'] }}">
+        {{ i['name'] }}
+        - {{ i['type'] }}
+        - {{ i['mtime'] }}
+        - {{ i['size'] }}
+
+      </a>
+    </li>
+    {% endfor %}
+</ul>
+{% elif file['type'] == 'file.text' %}
+  ...
+{% else %}
+  <table border="1">
+    {% for key, value in file.items() %}
+    <tr><td>{{ key }}</td><td>{{ value }}</td></tr>
+    {% endfor %}
+  </table>
+
+{% endif %}
+
+
+
+<a href="{{ root }}">Go back to root directory</a>
+
+
+{% endblock %}
+
+
+{% block body_end %}
+<script>
+  // TODO:
+  file = {{ file | safe}}
+</script>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block body %}
+<div class='layout-v'>
+  <header class='flex'>
+    {% include "view/menu.html" ignore missing %}
+  </header>
+
+  <div id='content'>
+    <main id="main">
+      {% block main %}
+        {{ main | safe}}
+      {% endblock %}
+    </main>
+    <aside id='toc'></aside>
+  </div>
+
+  <footer>
+    <hr>
+  <div class='flex space-between'>
+    <div>
+      <a href="/">主页</a>
+      <a href="/test">测试</a>
+      <a href="/browse">浏览</a>
+    </div>
+    <div></div>
+    <div>
+      <i id="site_env">{{ env }}</i>
+      <i>{{ render_time }}</i>
+    </div>
+  </div>
+  </footer>
+</div>
+{% endblock %}
